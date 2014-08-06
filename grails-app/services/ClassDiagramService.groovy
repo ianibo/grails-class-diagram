@@ -262,7 +262,10 @@ class ClassDiagramService {
     }
 
     private getInterestingProperties(cls, prefs) {
-        if (cls instanceof GrailsDomainClass) {
+        if ( prefs.omitProperties ) {
+          []
+        }
+        else if (cls instanceof GrailsDomainClass) {
             cls.properties.findAll { prop ->
                 !(prop.name in ["id","version"]) && 
                 (!prop.association || (prop.embedded && prefs.showEmbeddedAsProperty)) &&
